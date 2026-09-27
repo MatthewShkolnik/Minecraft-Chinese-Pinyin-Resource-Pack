@@ -7,8 +7,8 @@
 [![Python 3.9+](https://img.shields.io/badge/Generator-Python%203.9%2B-orange?style=for-the-badge&logo=python)](generate_pack.py)
 
 <p align="center">
-  <img src=https://media.forgecdn.net/attachments/1980/570/curseforge_banner-jpg.jpg<img width="850" height="474" alt="image" src="https://github.com/user-attachments/assets/5bb24ec9-934d-4b58-bdf9-08c92f2ed487" />
-" alt="Minecraft Chinese with Pinyin Banner" width="100%">
+  <img src=“https://media.forgecdn.net/attachments/1980/570/curseforge_banner-jpg.jpg” <img width="850" height="474" alt="image" src="https://media.forgecdn.net/attachments/1980/570/curseforge_banner-jpg.jpg<img width="850" height="474" alt="image" src="https://github.com/user-attachments/assets/9b39391a-2015-4def-b001-0ca3b3c53ec8" />
+" /> alt="Minecraft Chinese with Pinyin Banner" width="100%">
 </p>
 
 A Minecraft: Java Edition resource pack that displays Chinese characters (Hanzi) alongside tone-marked Pinyin for items, blocks, mobs, and UI elements, while keeping all in-game slash commands in standard English.
