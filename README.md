@@ -6,6 +6,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Generator-Python%203.9%2B-orange?style=for-the-badge&logo=python)](generate_pack.py)
 
+<p align="center">
+  <img src="curseforge/curseforge_banner.png" alt="Minecraft Chinese with Pinyin Banner" width="100%">
+</p>
+
 > **Learn Chinese while dodging Creepers and mining Diamonds — without breaking your slash commands!** 🗡️🐉💎
 
 Have you ever switched Minecraft to Chinese to practice your language skills, only to stare blankly at a wall of complex Hanzi wondering how on earth to pronounce it? Or worse, tried to type `/give @p diamond_sword` or `/locate structure` only to realize the command parser had a meltdown or your muscle memory hit a brick wall?
@@ -125,6 +129,10 @@ This will:
 
 ```text
 Minecraft-Chinese-Pinyin-Resource-Pack/
+├── curseforge/                         # CurseForge Release Graphics
+│   ├── curseforge_logo.png             # 1024x1024 Project Avatar
+│   ├── curseforge_banner.png           # 1376x768 (16:9) Project Banner
+│   └── curseforge_banner_wide.png      # 1376x458 (3:1) Header Banner
 ├── dist/                               # Generated unpacked pack and zip
 │   ├── Pinyin_Resource_Pack/
 │   │   ├── assets/minecraft/lang/      # zh_cn, zh_hk, zh_tw, lzh, en_us
