@@ -28,16 +28,6 @@ A Minecraft: Java Edition resource pack that displays Chinese characters (Hanzi)
 
 ---
 
-## Use Cases
-
-* **Language Learning**: Learn vocabulary and character pronunciation through in-game context without relying on standalone flashcards.
-* **Multiplayer and International Servers**: Navigate Chinese-language Minecraft servers, inventories, trade menus, and chat references without translation friction.
-* **Heritage Speakers**: Bridge existing conversational spoken Mandarin with character recognition using Pinyin phonetic guides.
-* **Server Administration**: Maintain and execute command blocks, macros, and server commands without broken syntax or localized command arguments.
-* **Bilingual Content Creation**: Produce dual-language content accessible to both English- and Chinese-speaking audiences.
-
----
-
 ## In-Game Examples
 
 | Item / Concept | Standard English | Vanilla Chinese | Pinyin Resource Pack |
