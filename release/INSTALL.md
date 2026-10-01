@@ -7,7 +7,7 @@ Follow these instructions to install the Minecraft Chinese Pinyin Resource Pack 
 ## Step 1: Download the Resource Pack
 
 Download the latest release file:
-* `Minecraft-Chinese-Pinyin-v1.0.0.zip`
+* `Minecraft-Chinese-Pinyin-v1.1.0.zip`
 
 Do not unzip the archive unless your launcher requires unpacked folders; Minecraft natively loads `.zip` packs.
 
@@ -30,7 +30,7 @@ Do not unzip the archive unless your launcher requires unpacked folders; Minecra
 
 ## Step 3: Activate the Pack
 
-1. Move or copy `Minecraft-Chinese-Pinyin-v1.0.0.zip` into the `resourcepacks` directory.
+1. Move or copy `Minecraft-Chinese-Pinyin-v1.1.0.zip` into the `resourcepacks` directory.
 2. Return to Minecraft.
 3. In the **Resource Packs** menu, find **Minecraft Chinese with Pinyin** in the **Available** column on the left.
 4. Click the arrow to move it to the **Selected** column on the right.
@@ -41,8 +41,9 @@ Do not unzip the archive unless your launcher requires unpacked folders; Minecra
 ## Step 4: Language Selection
 
 Select any of the following languages under **Options** -> **Language...**:
-* **简体中文 (中国大陆)** - Simplified Chinese
-* **繁體中文 (香港特別行政區)** - Traditional Chinese (Hong Kong)
-* **繁體中文 (台灣)** - Traditional Chinese (Taiwan)
-* **文言 (華夏)** - Classical Chinese
+* **中文 (拼音)** - Dedicated custom language (Chinese with Pinyin) without changing system English.
+* **简体中文 (中国大陆)** - Simplified Chinese with Pinyin annotations.
+* **繁體中文 (香港特別行政區)** - Traditional Chinese (Hong Kong) with Pinyin annotations.
+* **繁體中文 (台灣)** - Traditional Chinese (Taiwan) with Pinyin annotations.
+* **文言 (華夏)** - Classical Chinese with Pinyin annotations.
 * **English (US)** - Also supported via the included English fallback.

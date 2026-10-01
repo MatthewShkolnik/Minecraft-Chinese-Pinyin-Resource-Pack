@@ -1,6 +1,17 @@
 {
   "pack": {
-    "pack_format": 32,
+    "pack_format": 97,
+    "supported_formats": {
+      "min_inclusive": 32,
+      "max_inclusive": 97
+    },
     "description": "Minecraft Chinese with Pinyin (Un-translated Commands)"
+  },
+  "language": {
+    "zh_py": {
+      "name": "中文 (拼音)",
+      "region": "Chinese with Pinyin",
+      "bidirectional": false
+    }
   }
 }

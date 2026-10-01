@@ -22,3 +22,7 @@ Thumbs.db
 # Archives & Logs
 *.log
 dist/*.zpaq
+
+# Cache & Testing
+.cache/
+.pytest_cache/
