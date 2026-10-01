@@ -1,0 +1,36 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish"
+        required: true
+        default: "v1.1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name || inputs.tag }}
+          name: Minecraft Chinese with Pinyin (${{ github.ref_name || inputs.tag }})
+          body_path: release/RELEASE_NOTES.md
+          files: |
+            release/Minecraft-Chinese-Pinyin-v1.1.0.zip
+            release/SHA256SUMS.txt
+            release/pack.mcmeta
+            release/pack.png
+          draft: false
+          prerelease: false
