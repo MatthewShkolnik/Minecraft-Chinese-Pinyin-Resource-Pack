@@ -8,9 +8,9 @@ Follow these instructions to install the Minecraft Chinese Pinyin Resource Pack 
 
 ### Step 1: Download the Resource Pack
 Download your desired release variant:
-* `Minecraft-Chinese-Pinyin-v1.2.0.zip` (Standard tone marks)
-* `Minecraft-Chinese-Pinyin-v1.2.0-Numbers.zip` (Tone numbers)
-* `Minecraft-Chinese-Pinyin-v1.2.0-Recall.zip` (Recall mode)
+* `Minecraft-Chinese-Pinyin-v1.2.1.zip` (Standard tone marks)
+* `Minecraft-Chinese-Pinyin-v1.2.1-Numbers.zip` (Tone numbers)
+* `Minecraft-Chinese-Pinyin-v1.2.1-Recall.zip` (Recall mode)
 
 Do not unzip the archive unless your launcher requires unpacked folders; Minecraft natively loads `.zip` packs.
 
@@ -38,7 +38,7 @@ Under **Options** -> **Language...**, select:
 
 ## Bedrock Edition
 
-1. Download `Minecraft-Chinese-Pinyin-v1.2.0.mcpack`.
+1. Download `Minecraft-Chinese-Pinyin-v1.2.1.mcpack`.
 2. Double-click or open the `.mcpack` file on your device (Windows, Android, iOS, iPadOS).
 3. Minecraft Bedrock Edition will launch and import the pack automatically.
 4. Navigate to **Settings** -> **Global Resources** (or individual world settings), select **Minecraft Chinese with Pinyin**, and click **Activate**.

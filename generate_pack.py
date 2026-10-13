@@ -19,7 +19,7 @@ except ImportError:
 # Suppress jieba logging
 jieba.setLogLevel(logging.WARNING)
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 # Comprehensive CJK regex covering BMP, Extension A, compatibility ideographs, and Extension B+
 CJK_REGEX = re.compile(r'([\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\U00020000-\U0002ebe0]+)')
@@ -653,13 +653,17 @@ def build_bedrock_pack(
     else:
         desc = "Minecraft Chinese with Pinyin (Un-translated Commands)"
 
+    ver_nums = [int(p) for p in __version__.split(".") if p.isdigit()]
+    if len(ver_nums) < 3:
+        ver_nums = (ver_nums + [0, 0, 0])[:3]
+
     manifest = {
         "format_version": 2,
         "header": {
             "name": "Minecraft Chinese with Pinyin",
             "description": desc,
             "uuid": header_uuid,
-            "version": [1, 2, 0],
+            "version": ver_nums,
             "min_engine_version": [1, 20, 0]
         },
         "modules": [
@@ -667,7 +671,7 @@ def build_bedrock_pack(
                 "description": desc,
                 "type": "resources",
                 "uuid": module_uuid,
-                "version": [1, 2, 0]
+                "version": ver_nums
             }
         ]
     }

@@ -1,6 +1,6 @@
 # Minecraft Chinese with Pinyin (拼音) Resource Pack
 
-[![Release](https://img.shields.io/badge/Release-v1.2.0-emerald?style=for-the-badge&logo=github)](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/releases)
+[![Release](https://img.shields.io/badge/Release-v1.2.1-emerald?style=for-the-badge&logo=github)](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/releases)
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-Java%20%26%20Bedrock-blue?style=for-the-badge&logo=mojang)](https://minecraft.net)
 [![Pack Format](https://img.shields.io/badge/Pack%20Format-32--97%20%7C%20Bedrock-purple?style=for-the-badge)](https://minecraft.wiki/w/Pack_format)
 [![CI](https://img.shields.io/badge/CI-Passing-brightgreen?style=for-the-badge&logo=github-actions)](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/actions)
@@ -65,7 +65,7 @@ A Minecraft resource pack (for both **Java Edition** and **Bedrock Edition**) th
 ## Installation
 
 ### Java Edition
-1. Download `Minecraft-Chinese-Pinyin-v1.2.0.zip` (or Numbers / Recall variants) from [Releases](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/releases).
+1. Download `Minecraft-Chinese-Pinyin-v1.2.1.zip` (or Numbers / Recall variants) from [Releases](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/releases).
 2. In Minecraft: Java Edition, go to **Options** -> **Resource Packs...** -> **Open Pack Folder**.
 3. Copy the `.zip` file into the opened `resourcepacks` directory.
 4. Move the pack from the **Available** column to the **Selected** column, then click **Done**.
@@ -76,7 +76,7 @@ A Minecraft resource pack (for both **Java Edition** and **Bedrock Edition**) th
    * Or any standard Chinese dialect or English (US).
 
 ### Bedrock Edition
-1. Download `Minecraft-Chinese-Pinyin-v1.2.0.mcpack` from [Releases](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/releases).
+1. Download `Minecraft-Chinese-Pinyin-v1.2.1.mcpack` from [Releases](https://github.com/MatthewShkolnik/Minecraft-Chinese-Pinyin-Resource-Pack/releases).
 2. Double-click or open the `.mcpack` file on Windows, Android, iOS, or iPadOS to import directly into Minecraft.
 3. In Minecraft: Bedrock Edition, navigate to **Settings** -> **Global Resources**, select the pack, and click **Activate**.
 
@@ -155,15 +155,15 @@ Minecraft-Chinese-Pinyin-Resource-Pack/
 ├── dist/                               # Generated unpacked packs and archives
 │   ├── Pinyin_Resource_Pack/           # Java pack (zh_cn, zh_hk, zh_tw, lzh, zh_py, zh_zy, zh_yue)
 │   ├── Pinyin_Bedrock_Pack/            # Bedrock pack (manifest.json, texts/)
-│   ├── Minecraft-Chinese-Pinyin-v1.2.0.zip
-│   ├── Minecraft-Chinese-Pinyin-v1.2.0-Numbers.zip
-│   ├── Minecraft-Chinese-Pinyin-v1.2.0-Recall.zip
-│   └── Minecraft-Chinese-Pinyin-v1.2.0.mcpack
+│   ├── Minecraft-Chinese-Pinyin-v1.2.1.zip
+│   ├── Minecraft-Chinese-Pinyin-v1.2.1-Numbers.zip
+│   ├── Minecraft-Chinese-Pinyin-v1.2.1-Recall.zip
+│   └── Minecraft-Chinese-Pinyin-v1.2.1.mcpack
 ├── release/                            # Distribution release assets
 │   ├── RELEASE_NOTES.md
 │   └── SHA256SUMS.txt
 ├── tests/
-│   └── test_pack.py                    # Automated test suite (19 unit tests)
+│   └── test_pack.py                    # Automated test suite (20 unit tests)
 ├── banner.png                          # Repository banner
 ├── generate_pack.py                    # Pack generator script
 ├── pack.png                            # Pack icon (256x256)

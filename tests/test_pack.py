@@ -13,7 +13,8 @@ from generate_pack import (
     load_cantonese_dict,
     load_config,
     parse_args,
-    normalize_color_code
+    normalize_color_code,
+    __version__
 )
 
 class TestPinyinGenerator(unittest.TestCase):
@@ -436,7 +437,8 @@ class TestBuiltAssets(unittest.TestCase):
 
         self.assertEqual(manifest.get("format_version"), 2)
         self.assertIn("header", manifest)
-        self.assertEqual(manifest["header"].get("version"), [1, 2, 0])
+        expected_version = [int(p) for p in __version__.split(".") if p.isdigit()]
+        self.assertEqual(manifest["header"].get("version"), expected_version)
         self.assertEqual(manifest["header"].get("min_engine_version"), [1, 20, 0])
         self.assertIn("uuid", manifest["header"])
         self.assertIn("modules", manifest)
