@@ -1,1 +1,4 @@
-16707e832ee7d58088931bd1aa811ee2a7b56b0d6e333d68c4d827b0c521c0b5  Minecraft-Chinese-Pinyin-v1.1.0.zip
+d316511752cfaf04f746c42b3bccaf6e0b5aaa476163d9e43c5bf78eea1b595b  Minecraft-Chinese-Pinyin-v1.2.0-Numbers.zip
+d489d37868a80d577829ab48e75293460e977091410f167d6c19d9e6dd6a7331  Minecraft-Chinese-Pinyin-v1.2.0-Recall.zip
+2d7ebd51fa45047cd271cfdc2b6a65521f1ce130adc11beacba88376e4f45802  Minecraft-Chinese-Pinyin-v1.2.0.zip
+31f1fd2dc2bf0072f8d08f52bf93b07560941e585de7d83d7526960a1c504c4c  Minecraft-Chinese-Pinyin-v1.2.0.mcpack

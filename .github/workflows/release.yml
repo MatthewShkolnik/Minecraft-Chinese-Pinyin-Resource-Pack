@@ -9,7 +9,7 @@ on:
       tag:
         description: "Tag to publish"
         required: true
-        default: "v1.1.0"
+        default: "v1.2.0"
 
 permissions:
   contents: write
@@ -21,6 +21,36 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Build release archive and checksums
+        id: build
+        run: |
+          TAG="${{ github.ref_name || inputs.tag }}"
+          ZIP_NAME="Minecraft-Chinese-Pinyin-${TAG}.zip"
+          echo "Building release package for tag: ${TAG} (${ZIP_NAME})"
+          
+          # Clean any stale release archives
+          rm -f release/*.zip release/*.mcpack
+          
+          # Build packages into release folder with all variants
+          python generate_pack.py --all-variants --output-dir release --zip-name "${ZIP_NAME}"
+          
+          # Compute sha256 checksum for all generated archives
+          cd release
+          sha256sum Minecraft-Chinese-Pinyin-*.zip Minecraft-Chinese-Pinyin-*.mcpack > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -28,7 +58,8 @@ jobs:
           name: Minecraft Chinese with Pinyin (${{ github.ref_name || inputs.tag }})
           body_path: release/RELEASE_NOTES.md
           files: |
-            release/Minecraft-Chinese-Pinyin-v1.1.0.zip
+            release/Minecraft-Chinese-Pinyin-*.zip
+            release/Minecraft-Chinese-Pinyin-*.mcpack
             release/SHA256SUMS.txt
             release/pack.mcmeta
             release/pack.png

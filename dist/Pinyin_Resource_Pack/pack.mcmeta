@@ -12,6 +12,16 @@
       "name": "中文 (拼音)",
       "region": "Chinese with Pinyin",
       "bidirectional": false
+    },
+    "zh_zy": {
+      "name": "中文 (注音)",
+      "region": "Chinese with Zhuyin",
+      "bidirectional": false
+    },
+    "zh_yue": {
+      "name": "廣東話 (粵拼)",
+      "region": "Cantonese with Jyutping",
+      "bidirectional": false
     }
   }
 }

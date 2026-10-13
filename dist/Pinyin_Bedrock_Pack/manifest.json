@@ -1,0 +1,30 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Minecraft Chinese with Pinyin",
+    "description": "Minecraft Chinese with Pinyin (Un-translated Commands)",
+    "uuid": "2ff38f9d-48a2-5bd5-b819-07baeb1fe6b7",
+    "version": [
+      1,
+      2,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      20,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "description": "Minecraft Chinese with Pinyin (Un-translated Commands)",
+      "type": "resources",
+      "uuid": "70c82eff-3c75-5256-9f5c-5f201006f0ea",
+      "version": [
+        1,
+        2,
+        0
+      ]
+    }
+  ]
+}
