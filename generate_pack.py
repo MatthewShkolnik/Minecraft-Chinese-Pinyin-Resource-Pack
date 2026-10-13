@@ -201,6 +201,30 @@ def get_lang_file(asset_index_url, lang_name, cache_dir=None, session=None):
 
     return fetch_json(lang_url, lang_cache, session)
 
+MINECRAFT_COLOR_NAMES = {
+    "black": "§0",
+    "dark_blue": "§1",
+    "dark_green": "§2",
+    "dark_aqua": "§3",
+    "dark_red": "§4",
+    "dark_purple": "§5",
+    "gold": "§6",
+    "orange": "§6",
+    "gray": "§7",
+    "grey": "§7",
+    "dark_gray": "§8",
+    "dark_grey": "§8",
+    "blue": "§9",
+    "green": "§a",
+    "aqua": "§b",
+    "cyan": "§b",
+    "red": "§c",
+    "light_purple": "§d",
+    "pink": "§d",
+    "yellow": "§e",
+    "white": "§f",
+}
+
 def normalize_color_code(pinyin_color):
     """Normalizes a Minecraft color code or returns None if disabled."""
     if not pinyin_color:
@@ -208,6 +232,8 @@ def normalize_color_code(pinyin_color):
     val = str(pinyin_color).strip().lower()
     if val in ("none", "off", "false", "no", "plain", ""):
         return None
+    if val in MINECRAFT_COLOR_NAMES:
+        return MINECRAFT_COLOR_NAMES[val]
     if val.startswith("§"):
         return val
     return f"§{val}"
@@ -766,9 +792,58 @@ def build_resource_pack(args):
             no_zip=args.no_zip
         )
 
-def parse_args():
+def load_config(config_path=".config"):
+    """Loads settings from a configuration file.
+    Supports .config, .ini, .json, and flat key=value format.
+    """
+    if not config_path or not os.path.exists(config_path):
+        return {}
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            content = f.read().strip()
+        if not content:
+            return {}
+        # Support JSON format
+        if content.startswith("{"):
+            try:
+                data = json.loads(content)
+                if isinstance(data, dict):
+                    return {str(k).lower().replace("-", "_"): v for k, v in data.items()}
+            except Exception:
+                pass
+        # Support key=value / INI format
+        config = {}
+        for line in content.splitlines():
+            line = line.strip()
+            if not line or line.startswith(("#", ";", "[")):
+                continue
+            if "=" in line:
+                k, _, v = line.partition("=")
+            elif ":" in line:
+                k, _, v = line.partition(":")
+            else:
+                continue
+            k = k.strip().lower().replace("-", "_")
+            v = v.strip().strip("'\"")
+            if v.lower() in ("true", "yes", "on"):
+                config[k] = True
+            elif v.lower() in ("false", "no", "off"):
+                config[k] = False
+            else:
+                config[k] = v
+        return config
+    except Exception as e:
+        print(f"Warning: Failed to load config from {config_path}: {e}")
+        return {}
+
+def parse_args(args_list=None):
     parser = argparse.ArgumentParser(
         description="Minecraft Chinese with Pinyin Resource Pack Generator"
+    )
+    parser.add_argument(
+        "--config",
+        default=".config",
+        help="Path to configuration file (default: '.config')"
     )
     parser.add_argument(
         "--version", "-v",
@@ -792,8 +867,8 @@ def parse_args():
     )
     parser.add_argument(
         "--pinyin-color",
-        default="§7",
-        help="Minecraft color code for Pinyin annotations (e.g. '7', '§7', or 'none'). Default: '§7'."
+        default=None,
+        help="Minecraft color code for Pinyin annotations (e.g. '7', '§7', 'gold', or 'none'). Defaults to .config (or '§7')."
     )
     parser.add_argument(
         "--no-color",
@@ -803,8 +878,8 @@ def parse_args():
     parser.add_argument(
         "--pinyin-style",
         choices=["marks", "numbers", "plain", "bopomofo", "zhuyin", "jyutping"],
-        default="marks",
-        help="Phonetic style: 'marks' (tone marks), 'numbers' (tone numbers), 'plain' (no tones), 'bopomofo'/'zhuyin' (注音符號), or 'jyutping' (粵拼). Default: 'marks'."
+        default=None,
+        help="Phonetic style: 'marks' (tone marks), 'numbers' (tone numbers), 'plain' (no tones), 'bopomofo'/'zhuyin' (注音符號), or 'jyutping' (粵拼). Defaults to .config (or 'marks')."
     )
     parser.add_argument(
         "--bedrock",
@@ -814,6 +889,7 @@ def parse_args():
     parser.add_argument(
         "--recall",
         action="store_true",
+        default=False,
         help="Recall mode: places Pinyin first with Chinese characters in secondary parentheses (e.g. 'Zuànshí Jiàn §7(钻石剑)§r')."
     )
     parser.add_argument(
@@ -842,9 +918,37 @@ def parse_args():
         default=["zh_cn.json", "zh_hk.json", "zh_tw.json", "lzh.json"],
         help="Language files to process"
     )
-    parsed = parser.parse_args()
+    parsed = parser.parse_args(args_list)
+
+    # Load settings from .config file if present
+    cfg = load_config(parsed.config) if parsed.config else {}
+
+    # Resolve pinyin_color with precedence:
+    # 1. CLI --no-color flag
+    # 2. CLI --pinyin-color option
+    # 3. .config no_color option
+    # 4. .config pinyin_color / color option
+    # 5. Default "§7"
     if parsed.no_color:
         parsed.pinyin_color = None
+    elif parsed.pinyin_color is not None:
+        parsed.pinyin_color = normalize_color_code(parsed.pinyin_color)
+    elif cfg.get("no_color"):
+        parsed.pinyin_color = None
+    elif "pinyin_color" in cfg or "color" in cfg:
+        cfg_val = cfg.get("pinyin_color") if "pinyin_color" in cfg else cfg.get("color")
+        parsed.pinyin_color = normalize_color_code(cfg_val)
+    else:
+        parsed.pinyin_color = "§7"
+
+    # Resolve pinyin_style (CLI overrides config, fallback "marks")
+    if parsed.pinyin_style is None:
+        parsed.pinyin_style = cfg.get("pinyin_style", "marks")
+
+    # Resolve recall mode (CLI overrides config)
+    if not parsed.recall and cfg.get("recall"):
+        parsed.recall = bool(cfg.get("recall"))
+
     return parsed
 
 if __name__ == "__main__":

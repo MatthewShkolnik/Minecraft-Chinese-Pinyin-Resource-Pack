@@ -112,7 +112,24 @@ python generate_pack.py --pinyin-style numbers
 python generate_pack.py --recall
 ```
 
-### 4. Run Automated Test Suite
+### 4. Configuration (`.config`)
+
+You can customize the Pinyin annotation color and defaults directly in the [`.config`](.config) file without passing command-line flags every time:
+
+```ini
+# .config
+pinyin_color = §7      # Formatting code (§7, §6), color name (gray, gold, yellow), or 'none'
+pinyin_style = marks   # marks, numbers, plain, bopomofo, jyutping
+recall = false         # true or false
+```
+
+Supported color formats:
+* **Minecraft formatting codes**: `§7` (muted gray), `§6` (gold), `§e` (yellow), `§a` (green), `§b` (aqua), `§c` (red), `§d` (pink), `§f` (white), etc.
+* **Digit/hex codes**: `7`, `6`, `e`, `a`, `b`, `c`, `d`, `f`
+* **Color names**: `gray`, `gold`, `yellow`, `green`, `aqua`, `red`, `light_purple`, `white`
+* **Plain / unstyled text**: `none`, `off`, `false`
+
+### 5. Run Automated Test Suite
 ```bash
 python -m unittest discover -s tests -v
 ```
@@ -123,6 +140,7 @@ python -m unittest discover -s tests -v
 
 ```text
 Minecraft-Chinese-Pinyin-Resource-Pack/
+├── .config                             # Generator configuration file (color, style, recall)
 ├── .github/
 │   └── workflows/
 │       ├── ci.yml                      # Automated CI workflow (Python 3.9-3.13)

@@ -10,7 +10,10 @@ from generate_pack import (
     convert_to_bopomofo,
     process_bedrock_lang,
     load_overrides,
-    load_cantonese_dict
+    load_cantonese_dict,
+    load_config,
+    parse_args,
+    normalize_color_code
 )
 
 class TestPinyinGenerator(unittest.TestCase):
@@ -84,12 +87,81 @@ class TestPinyinGenerator(unittest.TestCase):
         res_gold = convert_to_pinyin("钻石剑", pinyin_color="6")
         self.assertEqual(res_gold, "钻石剑 §6(Zuànshí Jiàn)§r")
 
+        # Named colors
+        res_named_gold = convert_to_pinyin("钻石剑", pinyin_color="gold")
+        self.assertEqual(res_named_gold, "钻石剑 §6(Zuànshí Jiàn)§r")
+
+        res_named_yellow = convert_to_pinyin("钻石剑", pinyin_color="yellow")
+        self.assertEqual(res_named_yellow, "钻石剑 §e(Zuànshí Jiàn)§r")
+
+        res_named_gray = convert_to_pinyin("钻石剑", pinyin_color="gray")
+        self.assertEqual(res_named_gray, "钻石剑 §7(Zuànshí Jiàn)§r")
+
         # Disabled color / plain
         res_plain = convert_to_pinyin("钻石剑", pinyin_color=None)
         self.assertEqual(res_plain, "钻石剑 (Zuànshí Jiàn)")
 
         res_none = convert_to_pinyin("钻石剑", pinyin_color="none")
         self.assertEqual(res_none, "钻石剑 (Zuànshí Jiàn)")
+
+    def test_config_file_color_loading(self):
+        """Verify color configuration can be read from a .config file in both INI/key-value and JSON formats."""
+        import tempfile
+
+        # 1. Test key=value format
+        with tempfile.NamedTemporaryFile("w", delete=False, suffix=".config") as f:
+            f.write("# Minecraft config\npinyin_color = §6\n")
+            tmp_cfg = f.name
+        try:
+            parsed = parse_args(["--config", tmp_cfg])
+            self.assertEqual(parsed.pinyin_color, "§6")
+        finally:
+            os.remove(tmp_cfg)
+
+        # 2. Test named color in config
+        with tempfile.NamedTemporaryFile("w", delete=False, suffix=".config") as f:
+            f.write("color = gold\n")
+            tmp_cfg = f.name
+        try:
+            parsed = parse_args(["--config", tmp_cfg])
+            self.assertEqual(parsed.pinyin_color, "§6")
+        finally:
+            os.remove(tmp_cfg)
+
+        # 3. Test JSON format config
+        with tempfile.NamedTemporaryFile("w", delete=False, suffix=".config") as f:
+            f.write('{"pinyin_color": "aqua"}\n')
+            tmp_cfg = f.name
+        try:
+            parsed = parse_args(["--config", tmp_cfg])
+            self.assertEqual(parsed.pinyin_color, "§b")
+        finally:
+            os.remove(tmp_cfg)
+
+        # 4. Test no_color in config
+        with tempfile.NamedTemporaryFile("w", delete=False, suffix=".config") as f:
+            f.write("no_color = true\n")
+            tmp_cfg = f.name
+        try:
+            parsed = parse_args(["--config", tmp_cfg])
+            self.assertIsNone(parsed.pinyin_color)
+        finally:
+            os.remove(tmp_cfg)
+
+        # 5. Test CLI override over config
+        with tempfile.NamedTemporaryFile("w", delete=False, suffix=".config") as f:
+            f.write("pinyin_color = §6\n")
+            tmp_cfg = f.name
+        try:
+            # CLI --pinyin-color overrides config
+            parsed = parse_args(["--config", tmp_cfg, "--pinyin-color", "§e"])
+            self.assertEqual(parsed.pinyin_color, "§e")
+
+            # CLI --no-color overrides config
+            parsed_none = parse_args(["--config", tmp_cfg, "--no-color"])
+            self.assertIsNone(parsed_none.pinyin_color)
+        finally:
+            os.remove(tmp_cfg)
 
     def test_pale_garden_and_121_overrides(self):
         """Verify 1.21.4 Pale Garden and mob/block phonetic overrides."""
